@@ -2,6 +2,8 @@
 
 一个中文命题逻辑可视化工具。写下表达式，查看运算结构、布尔决策图和完整真值表，切换命题取值并保存自己的思路。
 
+项目源码：[cnm-nmd/logicsim-modern](https://github.com/cnm-nmd/logicsim-modern)。
+
 由当前 Codex 对话完成改造。UI 参考用户指定的 Apple 中国在线商店的浅灰背景、大标题、留白、细导航和圆角卡片；新增界面与图形组件独立实现。
 
 ## 运行
