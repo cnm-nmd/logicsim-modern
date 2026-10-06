@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="把命题逻辑想清楚，也看清楚。LogicSim 支持普通表达式、逆波兰表达式、逻辑结构图、布尔决策图和真值表。">
+  <title>LogicSim — 让推理，一目了然</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">跳到工作区</a>
+  <header class="global-nav">
+    <nav class="nav-content" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="LogicSim 首页"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 25 16 7l10 18M10 18h12"/></svg><span>LogicSim</span></a>
+      <div class="nav-links">
+        <a href="#workspace">工作区</a>
+        <a href="#examples">示例</a>
+        <button data-action="show-table">真值表</button>
+        <button data-action="help">使用指南</button>
+        <a href="./legacy/" target="_blank" rel="noopener">原版网站 <span class="external-mark">↗</span></a>
+      </div>
+      <div class="nav-tools">
+        <button class="icon-button" data-action="focus-input" aria-label="编辑逻辑表达式"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></button>
+        <button class="icon-button" data-action="import" aria-label="载入项目"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16v12H4zM8 9V6a4 4 0 0 1 8 0v3"/></svg></button>
+      </div>
+    </nav>
+  </header>
+  <div class="announcement">从一个命题，到完整推理。用你熟悉的方式开始。<button data-action="help">了解用法 <span aria-hidden="true">›</span></button></div>
+  <main id="top">
+    <section class="hero content-width" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">逻辑。<span>想得清楚，<br>也看得清楚。</span></h1>
+        <p class="hero-caption">你的命题逻辑，化繁为简。</p>
+      </div>
+      <div class="hero-support">
+        <div class="support-item"><span class="support-icon" aria-hidden="true">?</span><div><p>第一次使用？</p><button class="text-link" data-action="help">从这里开始 <span aria-hidden="true">↗</span></button></div></div>
+        <div class="support-item"><span class="support-icon symbol" aria-hidden="true">∧</span><div><p>有个想法，试一试。</p><a class="text-link" href="#workspace">打开工作区 <span aria-hidden="true">↗</span></a></div></div>
+      </div>
+    </section>
+
+    <section class="operator-strip content-width" aria-label="逻辑运算与快捷入口">
+      <button class="operator-item" data-insert="∧"><span class="operator-art art-and" aria-hidden="true">∧</span><span>逻辑与</span></button>
+      <button class="operator-item" data-insert="∨"><span class="operator-art art-or" aria-hidden="true">∨</span><span>逻辑或</span></button>
+      <button class="operator-item" data-insert="¬"><span class="operator-art art-not" aria-hidden="true">¬</span><span>逻辑非</span></button>
+      <button class="operator-item" data-insert="→"><span class="operator-art art-implies" aria-hidden="true">→</span><span>逻辑推出</span></button>
+      <button class="operator-item" data-insert="↔"><span class="operator-art art-iff" aria-hidden="true">↔</span><span>逻辑等价</span></button>
+      <button class="operator-item" data-action="show-table"><span class="operator-art art-table" aria-hidden="true"><svg viewBox="0 0 56 56"><rect x="8" y="10" width="40" height="36" rx="6"/><path d="M8 22h40M8 34h40M22 10v36M35 10v36"/></svg></span><span>真值表</span></button>
+      <button class="operator-item" data-action="show-decision"><span class="operator-art art-graph" aria-hidden="true"><svg viewBox="0 0 56 56"><path d="M15 16h10v24h15M25 28h15"/><rect x="6" y="10" width="16" height="12" rx="4"/><rect x="34" y="22" width="16" height="12" rx="4"/><rect x="34" y="35" width="16" height="12" rx="4"/></svg></span><span>决策图</span></button>
+    </section>
+
+    <section id="workspace" class="workspace-section content-width" aria-labelledby="workspace-title">
+      <div class="section-heading"><h2 id="workspace-title">工作区。<span>一个表达式，多种视角。</span></h2><button class="text-link" data-action="reset">回到初始示例 <span aria-hidden="true">↺</span></button></div>
+      <div class="workspace-grid">
+        <section class="card editor-card" aria-labelledby="editor-title">
+          <div class="card-heading"><h3 id="editor-title">逻辑表达式</h3><span class="eyebrow">从这里开始</span></div>
+          <div class="segmented syntax-tabs" role="group" aria-label="输入格式">
+            <button class="is-active" data-syntax="infix" aria-pressed="true">普通表达式</button>
+            <button data-syntax="rpn" aria-pressed="false">逆波兰表达式</button>
+          </div>
+          <label class="sr-only" for="expression">逻辑表达式</label>
+          <textarea id="expression" spellcheck="false" rows="3" aria-describedby="syntax-hint expression-error">(P ∧ Q) → R</textarea>
+          <p id="syntax-hint" class="input-hint">也可以输入 (P &amp; Q) -&gt; R</p>
+          <div class="symbol-toolbar" aria-label="插入运算符"><button data-insert="¬" aria-label="插入非">¬</button><button data-insert="∧" aria-label="插入与">∧</button><button data-insert="∨" aria-label="插入或">∨</button><button data-insert="→" aria-label="插入推出">→</button><button data-insert="↔" aria-label="插入等价">↔</button><button data-insert="(" aria-label="插入左括号">(</button><button data-insert=")" aria-label="插入右括号">)</button></div>
+          <p id="expression-error" class="error-message" role="alert" hidden></p>
+          <button class="primary-button generate-button" id="generate">生成并分析 <span aria-hidden="true">↗</span></button>
+          <p class="keyboard-hint">快捷键 <kbd>Ctrl</kbd> + <kbd>Enter</kbd></p>
+          <div class="assignment-section">
+            <div class="minor-heading"><h4>设定命题</h4><span>点按切换真假</span></div>
+            <div id="assignments" class="assignment-list"></div>
+          </div>
+          <div class="current-result" aria-live="polite"><span>当前结果</span><strong id="result-text">真</strong><span id="result-value" class="result-value">1</span></div>
+          <div class="file-actions"><button class="text-link" data-action="import">载入项目 <span aria-hidden="true">↑</span></button><button class="text-link" data-action="save">保存项目 <span aria-hidden="true">↓</span></button></div>
+        </section>
+
+        <section class="card preview-card" aria-labelledby="preview-title">
+          <div class="preview-top"><div><h3 id="preview-title">逻辑结构图</h3><p id="preview-description">从命题到结果，看清每一步。</p></div><div class="segmented view-tabs" role="group" aria-label="结果视图"><button data-view="structure" class="is-active" aria-pressed="true">结构图</button><button data-view="decision" aria-pressed="false">决策图</button><button data-view="table" aria-pressed="false">真值表</button><button data-view="model" aria-pressed="false">JSON</button></div></div>
+          <div id="diagram-container" class="diagram-container">
+            <div class="graph-toolbar"><button class="small-icon" data-action="zoom-out" aria-label="缩小图形">−</button><span id="zoom-label">100%</span><button class="small-icon" data-action="zoom-in" aria-label="放大图形">+</button><button class="small-icon fit-button" data-action="fit" aria-label="适应画布">⊡</button><button class="graph-export" data-action="svg">导出 SVG <span aria-hidden="true">↓</span></button></div>
+            <div id="diagram" class="diagram-stage"></div>
+            <aside id="node-inspector" class="node-inspector" aria-labelledby="inspector-title" hidden><div class="minor-heading"><h4 id="inspector-title">编辑节点</h4><button class="small-icon" data-action="close-inspector" aria-label="关闭节点编辑">×</button></div><label for="node-label">显示名称</label><input id="node-label" maxlength="40"><label for="node-note">备注</label><textarea id="node-note" rows="3" maxlength="500"></textarea><button class="primary-button" data-action="save-node">保存修改</button><p>显示名称不改变命题含义。</p></aside>
+            <div class="diagram-legend"><span><i class="legend-dot true-dot"></i>真 · 1</span><span><i class="legend-dot false-dot"></i>假 · 0</span><span class="legend-note">拖动画布 · 点按节点编辑</span></div>
+          </div>
+          <div id="table-container" class="table-container" hidden><div class="table-options"><p id="table-count"></p><button class="text-link" data-action="csv">导出 CSV ↓</button></div><div class="table-scroll"><table id="truth-table"><caption class="sr-only">逻辑表达式的真值表</caption><thead></thead><tbody></tbody></table></div><div class="pagination"><button id="prev-page" class="secondary-button">上一页</button><span id="table-page"></span><button id="next-page" class="secondary-button">下一页</button></div></div>
+          <div id="model-container" class="model-container" hidden><div class="model-actions"><span>兼容原版 nodeArray / linkArray 格式</span><button class="text-link" data-action="apply-model">文本转图 ↗</button></div><label class="sr-only" for="model-json">图形 JSON 数据</label><textarea id="model-json" spellcheck="false"></textarea><p class="input-hint">可修改 JSON 后点击“文本转图”，或保存为项目文件。</p></div>
+          <div class="analysis-footer"><span id="classification" class="classification">可满足式</span><span id="analysis-summary">8 种组合 · 7 种为真</span><button class="text-link" data-action="share">分享表达式 <span aria-hidden="true">↗</span></button></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="examples" class="examples-section content-width" aria-labelledby="examples-title"><div class="section-heading"><h2 id="examples-title">试试看。<span>从熟悉的推理开始。</span></h2><span class="section-note">点按卡片，直接载入</span></div><div class="example-grid">
+      <button class="example-card card" data-example="conditional"><span class="eyebrow blue-text">条件推理</span><h3>两个条件，<br>一个结论。</h3><p>P 和 Q 同时成立，是否能推出 R？</p><span class="formula-art formula-light" aria-hidden="true"><span>P ∧ Q</span><i>→</i><span class="formula-result">R</span></span><span class="example-bottom">探索“与”和“推出” <span aria-hidden="true">↗</span></span></button>
+      <button class="example-card card dark-card" data-example="demorgan"><span class="eyebrow pale-blue">德摩根律</span><h3>换个说法，<br>还是同一个道理。</h3><p>“并非都成立”，等价于“至少一个不成立”。</p><span class="formula-art formula-dark" aria-hidden="true"><span>¬(P ∧ Q)</span><i>↔</i><span>¬P ∨ ¬Q</span></span><span class="example-bottom">看看为什么恒真 <span aria-hidden="true">↗</span></span></button>
+      <button class="example-card card" data-example="contradiction"><span class="eyebrow blue-text">矛盾检测</span><h3>一真一假，<br>能同时成立吗？</h3><p>一个命题和它的否定，放在一起会怎样？</p><span class="formula-art formula-contrast" aria-hidden="true"><span>P</span><i>∧</i><span class="negation-art">¬P</span></span><span class="example-bottom">认识永远为假的表达式 <span aria-hidden="true">↗</span></span></button>
+    </div></section>
+
+    <section class="features-section content-width" aria-labelledby="features-title"><div class="section-heading"><h2 id="features-title">清晰，有迹可循。<span>让思考更进一步。</span></h2></div><div class="feature-grid"><article class="card feature-card"><span class="feature-symbol" aria-hidden="true">Aa</span><h3><span>怎么顺手，</span><br>就怎么表达。</h3><p>数学符号、键盘写法，或原来的逆波兰表达式。你的习惯，都照顾到。</p></article><article class="card feature-card"><span class="feature-symbol" aria-hidden="true">↔</span><h3><span>从表达式到图形，</span><br>一步就到。</h3><p>结构图看运算，决策图看分支。切换命题真假，结果随之变化。</p></article><article class="card feature-card"><span class="feature-symbol" aria-hidden="true">01</span><h3><span>所有可能，</span><br>一次看全。</h3><p>真值表遍历每一种组合，识别恒真、矛盾与可满足式。支持最多 10 个命题。</p></article></div></section>
+
+    <section id="history-section" class="history-section content-width" hidden><div class="section-heading"><h2>最近使用。<span>接着上次的思路。</span></h2><button class="text-link" data-action="clear-history">清空记录</button></div><div id="history-list" class="history-list"></div><p class="history-note">记录保存在当前浏览器中。</p></section>
+    <section class="quick-links content-width" aria-labelledby="quick-title"><h2 id="quick-title">快速链接</h2><div><button data-action="help">使用指南 ↗</button><button data-action="save">保存项目 ↓</button><button data-action="png">导出图片 ↓</button><a href="./legacy/" target="_blank" rel="noopener">打开原版 ↗</a><a href="./README.md" target="_blank" rel="noopener" id="source-link">源码与说明 ↗</a></div></section>
+  </main>
+  <footer><div class="content-width"><div class="footer-note">LogicSim 专注于命题逻辑。所有表达式在你的浏览器内计算，项目可保存到本地。</div><div class="footer-bottom"><span>LogicSim · 逻辑表达式可视化</span><a href="https://gitlab.com/kuangdash/logicsim" target="_blank" rel="noopener">原项目：kuangdash / logicsim ↗</a><span>用清晰，连接每一个想法。</span></div></div></footer>
+
+  <input id="file-input" type="file" accept=".json,.txt,application/json,text/plain" hidden>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="help-dialog" class="help-dialog"><div class="dialog-header"><h2>从这里开始。</h2><button class="icon-button" data-action="close-help" aria-label="关闭使用指南">×</button></div><p class="dialog-intro">写下表达式，点“生成并分析”。然后切换命题真假，看看推理如何变化。</p><h3>选择你熟悉的写法</h3><div class="help-example"><strong>普通表达式</strong><code>(P ∧ Q) → R</code><span>键盘写法：<code>(P &amp; Q) -&gt; R</code></span></div><div class="help-example"><strong>逆波兰表达式</strong><code>P Q . R &gt;</code><span>先写命题，再写运算符；用空格分隔。</span></div><table class="help-table"><thead><tr><th>运算</th><th>普通写法</th><th>逆波兰写法</th></tr></thead><tbody><tr><td>逻辑非</td><td>¬P / !P / NOT P</td><td>P &lt;</td></tr><tr><td>逻辑与</td><td>P ∧ Q / P &amp; Q</td><td>P Q .</td></tr><tr><td>逻辑或</td><td>P ∨ Q / P | Q</td><td>P Q ,</td></tr><tr><td>逻辑推出</td><td>P → Q / P -&gt; Q</td><td>P Q &gt;</td></tr><tr><td>逻辑等价</td><td>P ↔ Q / P &lt;-&gt; Q</td><td>P Q =</td></tr></tbody></table><p>运算优先级：非 → 与 → 或 → 推出 → 等价。推出按右结合计算，例如 P → Q → R 表示 P → (Q → R)。不确定时，使用括号。</p><h3>每一种视角，都有用途</h3><p><strong>结构图</strong>展示运算结构，可点按节点添加名称与备注。<strong>决策图</strong>按命题的真假选择分支，使用原版兼容的图形数据。<strong>真值表</strong>遍历所有组合；点按一行可应用该组合。</p><h3>把思路保存下来</h3><p>项目文件包含表达式、命题取值和节点备注。支持载入原版 nodeArray / linkArray JSON，也可在 JSON 视图中修改后“文本转图”。任意导入图只展示结构，真值分析需要表达式。</p><p>0 / 1 和 false / true 表示常量。命题名称区分大小写。最多 10 个不同命题，可导出完整 CSV、SVG 和 PNG。</p><button class="primary-button dialog-done" data-action="close-help">开始探索</button></dialog>
+</body>
+</html>

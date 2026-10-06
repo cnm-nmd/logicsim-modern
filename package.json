@@ -1,0 +1,9 @@
+{
+  "name": "logicsim-modern",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "中文命题逻辑可视化工具，普通表达式、布尔决策图与真值表。",
+  "scripts": { "start": "node server.mjs", "test": "node --test tests/*.test.mjs" },
+  "engines": { "node": ">=20" }
+}
