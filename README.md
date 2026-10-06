@@ -6,8 +6,6 @@
 
 新版网站：[LogicSim](https://cnm-nmd.github.io/logicsim-modern/)。原版保留入口：[原版网站](https://cnm-nmd.github.io/logicsim-modern/legacy/)。
 
-由当前 Codex 对话完成改造。UI 参考用户指定的 Apple 中国在线商店的浅灰背景、大标题、留白、细导航和圆角卡片；新增界面与图形组件独立实现。
-
 ## 运行
 
 这是一个无构建依赖的静态网站。新增页面使用浏览器原生 JavaScript 模块，不需要安装 npm 包。
